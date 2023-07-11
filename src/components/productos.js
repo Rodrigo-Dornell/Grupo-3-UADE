@@ -1,5 +1,4 @@
-function productos () {
-    [
+export const productos = [
       {
         id: 1,
         nombre: "Nike Jordan",
@@ -27,6 +26,4 @@ function productos () {
         imagen:
           "https://ripleype.imgix.net/https%3A%2F%2Fs3.amazonaws.com%2Fimagenes-sellers-mercado-ripley%2F2021%2F11%2F11235552%2F81003032_0.jpg?w=750&h=555&ch=Width&auto=format&cs=strip&bg=FFFFFF&q=60&trimcolor=FFFFFF&trim=color&fit=fillmax&ixlib=js-1.1.0&s=badc12e3674bce62d3beea8b5999eb66",
       },
-    ];
-  }
-  export default productos
+    ]

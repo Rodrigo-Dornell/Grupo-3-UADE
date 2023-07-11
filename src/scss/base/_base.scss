@@ -1,0 +1,10 @@
+@use "../abstracts/variables";
+
+$font-poppins: "Poppins", sans-serif;
+
+html,body {
+  font-family: $font-poppins;
+}
+body {
+  background-color: variables.$rojo;
+}
