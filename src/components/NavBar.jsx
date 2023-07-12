@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,9 +12,11 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
+import Brightness6Icon from '@mui/icons-material/Brightness6';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import "../scss/Index.scss";
+import DarkModeToggle from './DarkModeToggle';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -59,6 +61,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [darkMode, setDarkMode] = useState(localStorage.getItem('modoOscuro') === 'true');
+
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add('darkMode');
+      localStorage.setItem('modoOscuro', true);
+    } else {
+      document.body.classList.remove('darkMode');
+      localStorage.setItem('modoOscuro', false);
+    }
+  }, [darkMode]);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -78,6 +91,10 @@ export default function PrimarySearchAppBar() {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const handleDarkModeToggle = () => {
+    setDarkMode(!darkMode);
   };
 
   const menuId = 'primary-search-account-menu';
@@ -120,19 +137,15 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+        <IconButton size="large" aria-label="DarkMode" color="inherit" onClick={handleDarkModeToggle}>
           <Badge badgeContent={4} color="error">
-            <MailIcon />
+            <Brightness6Icon />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <p>Dark mode</p>
       </MenuItem>
       <MenuItem>
-        <IconButton
-          size="large"
-          aria-label=""
-          color="inherit"
-        >
+        <IconButton size="large" aria-label="" color="inherit">
           <Badge badgeContent={17} color="error">
             <AddShoppingCartIcon />
           </Badge>
@@ -157,7 +170,7 @@ export default function PrimarySearchAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar sx={{ justifyContent: 'center' }}>
           <IconButton
             size="large"
             edge="start"
@@ -173,7 +186,7 @@ export default function PrimarySearchAppBar() {
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            MUI
+            SNEAKERS
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -186,9 +199,14 @@ export default function PrimarySearchAppBar() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+            <IconButton
+              size="large"
+              aria-label="darkMode"
+              color="inherit"
+              onClick={handleDarkModeToggle}
+            >
               <Badge badgeContent={0} color="error">
-                <MailIcon />
+                <Brightness6Icon />
               </Badge>
             </IconButton>
             <IconButton

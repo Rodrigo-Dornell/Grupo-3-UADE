@@ -1,3 +1,8 @@
-@mixin GridSet() {
-    background: black;
+@mixin settingsPM ($argumento1, $argumento2, $argumento3, $argumento4, $argumento5) {
+    border-radius: $argumento1;
+    margin-top: $argumento2;
+    padding: $argumento3;
+    margin-left: $argumento4;
+    margin-right: $argumento5;
+
 }

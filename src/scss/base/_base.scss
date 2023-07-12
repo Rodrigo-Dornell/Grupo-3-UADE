@@ -1,10 +1,11 @@
 @use "../abstracts/variables";
+@use "../abstracts/mixin";
 
 $font-poppins: "Poppins", sans-serif;
 
-html,body {
+html,
+body {
   font-family: $font-poppins;
 }
-body {
-  background-color: variables.$rojo;
-}
+
+

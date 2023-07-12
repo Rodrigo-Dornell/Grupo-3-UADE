@@ -1,12 +1,18 @@
+// main.jsx
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import App from "./components/App.jsx";
 import "./scss/Index.scss";
 import Product from "./components/Grids.jsx";
+import Carrito from './components/carrito.jsx';
+import Dark from './components/DarkM.jsx';
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.render(
   <React.StrictMode>
     <App />
     <Product />
-  </React.StrictMode>
+    <Carrito />
+
+  </React.StrictMode>,
+  document.getElementById("root")
 );
