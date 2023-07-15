@@ -28,16 +28,13 @@
   .pDescripcion {
     margin: 10px;
   }
-}
-.button {
-  text-align: center;
-}
-.boton {
-  background-color: variables.$verde;
-  border-radius: 20px;
-  padding: 7px 5px 7px 5px;
-}
-.boton:hover {
-  transform: scale(0.9);
-  background-color: variables.$verdeOscuro;
+  .boton {
+    background-color: variables.$verde;
+    border-radius: 20px;
+    padding: 7px 5px 7px 5px;
+  }
+  .boton:hover {
+    transform: scale(0.9);
+    background-color: variables.$verdeOscuro;
+  }
 }
