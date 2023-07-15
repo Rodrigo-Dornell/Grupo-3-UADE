@@ -16,7 +16,8 @@ import Brightness6Icon from "@mui/icons-material/Brightness6";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import "../scss/Index.scss";
-import Carrito from "./CarritoProduct";
+import CarritoProduct from "./CarritoProduct";
+import { useHistory } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -48,7 +49,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -59,11 +59,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const history = useHistory();
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem("modoOscuro") === "true"
   );
+  const [isCartVisibleMobile, setIsCartVisibleMobile] = useState(false);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
 
   useEffect(() => {
     if (darkMode) {
@@ -74,6 +78,13 @@ export default function PrimarySearchAppBar() {
       localStorage.setItem("modoOscuro", false);
     }
   }, [darkMode]);
+
+  useEffect(() => {
+    if (isFirstLoad) {
+      setIsCartVisibleMobile(false);
+      setIsFirstLoad(false);
+    }
+  }, [isFirstLoad]);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -97,6 +108,11 @@ export default function PrimarySearchAppBar() {
 
   const handleDarkModeToggle = () => {
     setDarkMode(!darkMode);
+  };
+
+  const handleAddToCartClick = () => {
+    setIsCartVisibleMobile(!isCartVisibleMobile);
+    history.push("/carrito");
   };
 
   const menuId = "primary-search-account-menu";
@@ -139,25 +155,27 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="DarkMode"
-          color="inherit"
-          onClick={handleDarkModeToggle}
-        >
-          <Badge>
-            <Brightness6Icon onClick={handleDarkModeToggle} />
-          </Badge>
-          <h6>Dark mode</h6>
-        </IconButton>
-      </MenuItem>
-      <MenuItem>
-        <IconButton size="large" aria-label="" color="inherit">
-          <Badge badgeContent={17} color="error">
-            <AddShoppingCartIcon onClick={Carrito} />
-          </Badge>
-          <h6>Carrito</h6>
-        </IconButton>
+      <IconButton
+  size="large"
+  aria-label="darkMode"
+  color="inherit"
+  onClick={handleDarkModeToggle}
+>
+  <Badge badgeContent={0} color="error">
+    <Brightness6Icon />
+  </Badge>
+</IconButton>
+
+<IconButton
+  size="large"
+  aria-label="show 17 new notifications"
+  color="inherit"
+  onClick={handleAddToCartClick}
+>
+  <Badge badgeContent={0} color="error">
+    <AddShoppingCartIcon />
+  </Badge>
+</IconButton>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -220,6 +238,7 @@ export default function PrimarySearchAppBar() {
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
+              onClick={handleAddToCartClick}
             >
               <Badge badgeContent={0} color="error">
                 <AddShoppingCartIcon />
@@ -253,6 +272,7 @@ export default function PrimarySearchAppBar() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
+      {isCartVisibleMobile && <CarritoProduct />}
     </Box>
   );
 }

@@ -13,7 +13,7 @@
     transition: transform 0.3s ease;
   }
   img:hover {
-    transform: scale(1.08);
+    transform: scale(1.06);
   }
   .pNombre {
     text-align: center;
@@ -36,5 +36,6 @@
   .boton:hover {
     transform: scale(0.9);
     background-color: variables.$verdeOscuro;
+    cursor: pointer;
   }
 }

@@ -2,9 +2,10 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 import { productos } from "./datos/Mercaderia.jsx";
-import Grid from "@mui/material/Unstable_Grid2";
+import Grid from "@mui/material/Grid";
 
 function Product() {
+  const history = useHistory();
   const [productosEnCarrito, setProductosEnCarrito] = React.useState([]);
 
   const agregarAlCarrito = (producto) => {
@@ -41,10 +42,10 @@ function Product() {
 
   return (
     <div>
-      <h2>Productos</h2>
+      <h2 className="tituloProductos">Productos</h2>
       <Grid container spacing={2}>
         {productos.map((producto) => (
-          <Grid key={producto.id} item xs={6} md={4}>
+          <Grid key={producto.id.toString()} item xs={6} md={4}>
             <div className="container">
               <h4 className="pNombre">{producto.nombre}</h4>
               <img src={producto.imagen} alt={producto.nombre} />
@@ -65,3 +66,4 @@ function Product() {
 }
 
 export default Product;
+
