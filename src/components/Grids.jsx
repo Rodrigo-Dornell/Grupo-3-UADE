@@ -4,17 +4,19 @@ import Swal from "sweetalert2";
 import { productos } from "./datos/Mercaderia.jsx";
 import Grid from "@mui/material/Grid";
 
-function Product() {
+function Grids() {
   const history = useHistory();
   const [productosEnCarrito, setProductosEnCarrito] = React.useState([]);
 
   const agregarAlCarrito = (producto) => {
-    let productoAgregado = productosEnCarrito.find(
+    let nuevosProductosEnCarrito = [...productosEnCarrito];
+
+    let productoAgregado = nuevosProductosEnCarrito.find(
       (elem) => elem.id === producto.id
     );
 
     if (productoAgregado === undefined) {
-      let nuevosProductosEnCarrito = [...productosEnCarrito, producto];
+      nuevosProductosEnCarrito.push(producto);
       setProductosEnCarrito(nuevosProductosEnCarrito);
       localStorage.setItem("carrito", JSON.stringify(nuevosProductosEnCarrito));
 
@@ -65,5 +67,5 @@ function Product() {
   );
 }
 
-export default Product;
+export default Grids;
 

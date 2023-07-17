@@ -16,7 +16,7 @@ import Brightness6Icon from "@mui/icons-material/Brightness6";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import "../scss/Index.scss";
-import CarritoProduct from "./CarritoProduct";
+import Carro from "./Carro";
 import { useHistory } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
@@ -112,7 +112,7 @@ export default function PrimarySearchAppBar() {
 
   const handleAddToCartClick = () => {
     setIsCartVisibleMobile(!isCartVisibleMobile);
-    history.push("/carrito");
+    history.push("/Carro");
   };
 
   const menuId = "primary-search-account-menu";
@@ -155,27 +155,27 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-      <IconButton
-  size="large"
-  aria-label="darkMode"
-  color="inherit"
-  onClick={handleDarkModeToggle}
->
-  <Badge badgeContent={0} color="error">
-    <Brightness6Icon />
-  </Badge>
-</IconButton>
+        <IconButton
+          size="large"
+          aria-label="darkMode"
+          color="inherit"
+          onClick={handleDarkModeToggle}
+        >
+          <Badge badgeContent={0} color="error">
+            <Brightness6Icon />
+          </Badge>
+        </IconButton>
 
-<IconButton
-  size="large"
-  aria-label="show 17 new notifications"
-  color="inherit"
-  onClick={handleAddToCartClick}
->
-  <Badge badgeContent={0} color="error">
-    <AddShoppingCartIcon />
-  </Badge>
-</IconButton>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+          onClick={handleAddToCartClick}
+        >
+          <Badge badgeContent={0} color="error">
+            <AddShoppingCartIcon />
+          </Badge>
+        </IconButton>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
