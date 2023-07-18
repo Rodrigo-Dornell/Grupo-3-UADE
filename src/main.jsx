@@ -13,6 +13,5 @@ root.render(
   <React.StrictMode>
     <App />
     <Product />
-    <Carro/>
   </React.StrictMode>
 );
