@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 import { productos } from "./datos/Mercaderia.jsx";
 import Grid from "@mui/material/Grid";
+import PrimarySearchAppBar from "./NavBar";
 
 function Grids() {
   const history = useHistory();
@@ -43,6 +44,7 @@ function Grids() {
   };
 
   return (
+    
     <div>
       <h2 className="tituloProductos">Productos</h2>
       <Grid container spacing={2}>

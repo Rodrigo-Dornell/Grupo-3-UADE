@@ -1,11 +1,14 @@
-import Carrito from "./CarritoProduct";
-import PrimarySearchAppBar from "./NavBar";
-function Carro () {
-    return (
-        <>
-        <PrimarySearchAppBar />
-            <Carrito/>
-        </>
-    )
+
+import React from "react";
+import CarritoProduct from "./CarritoProduct";
+
+function Carro() {
+  return (
+    <div>
+      {/* Solo se muestra CarritoProduct */}
+      <CarritoProduct />
+    </div>
+  );
 }
-export default Carro
+
+export default Carro;

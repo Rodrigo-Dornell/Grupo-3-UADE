@@ -1,5 +1,6 @@
 import React from "react";
-
+import { productos } from "./datos/Mercaderia";
+import Grid from "@mui/material/Grid";
 function Carrito() {
   let productosEnCarrito;
   if (localStorage.getItem("carrito")) {
@@ -13,12 +14,18 @@ function Carrito() {
 
   return (
     <div>
-      <h2>Carrito de compras</h2>
-      <ul>
-        {productosEnCarrito.map((producto) => (
-          <li key={producto.id}>{producto.nombre}</li>
+      <h2 className="tituloProductos">Productos en el Carrito</h2>
+      <Grid container spacing={2}>
+        {productos.map((producto) => (
+          <Grid key={producto.id.toString()} item xs={6} md={4}>
+            <div className="container">
+              <h4 className="pNombre">{producto.nombre}</h4>
+              <img src={producto.imagen} alt={producto.nombre} />
+              <p className="pPrecio">Precio: {producto.precio}</p>
+            </div>
+          </Grid>
         ))}
-      </ul>
+      </Grid>
     </div>
   );
 }

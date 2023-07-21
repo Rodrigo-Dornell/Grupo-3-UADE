@@ -16,8 +16,8 @@ import Brightness6Icon from "@mui/icons-material/Brightness6";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import "../scss/Index.scss";
-import Carro from "./Carro";
-import { useHistory } from "react-router-dom";
+import Carro from './Carro'
+import { Link } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -59,7 +59,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
-  const history = useHistory();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -112,7 +111,6 @@ export default function PrimarySearchAppBar() {
 
   const handleAddToCartClick = () => {
     setIsCartVisibleMobile(!isCartVisibleMobile);
-    history.push("/Carro");
   };
 
   const menuId = "primary-search-account-menu";
@@ -132,7 +130,11 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+        <Link to="/">
+      <MenuItem onClick={handleMenuClose}>
+          Profile
+      </MenuItem>
+        </Link>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
@@ -166,28 +168,18 @@ export default function PrimarySearchAppBar() {
           </Badge>
         </IconButton>
 
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-          onClick={handleAddToCartClick}
-        >
-          <Badge badgeContent={0} color="error">
-            <AddShoppingCartIcon />
-          </Badge>
-        </IconButton>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-          <h6>Profile</h6>
-        </IconButton>
+        <Link to="/carro"> 
+              <IconButton
+                size="large"
+                aria-label="show 17 new notifications"
+                color="inherit"
+                onClick={handleAddToCartClick}
+              >
+                <Badge badgeContent={0} color="error">
+                  <AddShoppingCartIcon />
+                </Badge>
+              </IconButton>
+            </Link>
       </MenuItem>
     </Menu>
   );
@@ -203,7 +195,16 @@ export default function PrimarySearchAppBar() {
             aria-label="open drawer"
             sx={{ mr: 2 }}
             
-          >
+            onClick={handleProfileMenuOpen}>
+          
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+        </IconButton>
             <MenuIcon />
           </IconButton>
           <Typography
@@ -235,23 +236,24 @@ export default function PrimarySearchAppBar() {
                 <Brightness6Icon />
               </Badge>
             </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-              onClick={handleAddToCartClick}
-            >
-              <Badge badgeContent={0} color="error">
-                <AddShoppingCartIcon />
-              </Badge>
-            </IconButton>
+            <Link to="/carro"> 
+              <IconButton
+                size="large"
+                aria-label="show 17 new notifications"
+                color="inherit"
+                onClick={handleAddToCartClick}
+              >
+                <Badge badgeContent={0} color="error">
+                  <AddShoppingCartIcon />
+                </Badge>
+              </IconButton>
+            </Link>
             <IconButton
               size="large"
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
               color="inherit"
             >
               <AccountCircle />
@@ -269,11 +271,11 @@ export default function PrimarySearchAppBar() {
               <MoreIcon />
             </IconButton>
           </Box>
-        </Toolbar>
+          </Toolbar>
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-      {isCartVisibleMobile && <CarritoProduct />}
+      {isCartVisibleMobile && <Carro />}
     </Box>
   );
 }
