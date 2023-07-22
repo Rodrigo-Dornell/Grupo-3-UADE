@@ -16,7 +16,7 @@ import Brightness6Icon from "@mui/icons-material/Brightness6";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import "../scss/Index.scss";
-import Carro from './Carro'
+import Carro from "./Carro";
 import { Link } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
@@ -58,8 +58,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
-
+export default function PrimarySearchAppBar({
+  searchTerm,
+  setSearchTerm,
+  handleSearch,
+}) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const [darkMode, setDarkMode] = useState(
@@ -112,7 +115,6 @@ export default function PrimarySearchAppBar() {
   const handleAddToCartClick = () => {
     setIsCartVisibleMobile(!isCartVisibleMobile);
   };
-
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -130,11 +132,9 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-        <Link to="/">
-      <MenuItem onClick={handleMenuClose}>
-          Profile
-      </MenuItem>
-        </Link>
+      <Link to="/">
+        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      </Link>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
@@ -168,18 +168,18 @@ export default function PrimarySearchAppBar() {
           </Badge>
         </IconButton>
 
-        <Link to="/carro"> 
-              <IconButton
-                size="large"
-                aria-label="show 17 new notifications"
-                color="inherit"
-                onClick={handleAddToCartClick}
-              >
-                <Badge badgeContent={0} color="error">
-                  <AddShoppingCartIcon />
-                </Badge>
-              </IconButton>
-            </Link>
+        <Link to="/carro">
+          <IconButton
+            size="large"
+            aria-label="show 17 new notifications"
+            color="inherit"
+            onClick={handleAddToCartClick}
+          >
+            <Badge badgeContent={0} color="error">
+              <AddShoppingCartIcon />
+            </Badge>
+          </IconButton>
+        </Link>
       </MenuItem>
     </Menu>
   );
@@ -194,19 +194,20 @@ export default function PrimarySearchAppBar() {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
-            
-            onClick={handleProfileMenuOpen}>
-          
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-        </IconButton>
+            onClick={handleProfileMenuOpen}
+          >
             <MenuIcon />
           </IconButton>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
+
           <Typography
             variant="h6"
             noWrap
@@ -220,8 +221,10 @@ export default function PrimarySearchAppBar() {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder="buscar.."
               inputProps={{ "aria-label": "search" }}
+              value={searchTerm || ""}
+              onChange={handleSearch}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
@@ -236,7 +239,7 @@ export default function PrimarySearchAppBar() {
                 <Brightness6Icon />
               </Badge>
             </IconButton>
-            <Link to="/carro"> 
+            <Link to="/carro">
               <IconButton
                 size="large"
                 aria-label="show 17 new notifications"
@@ -271,7 +274,7 @@ export default function PrimarySearchAppBar() {
               <MoreIcon />
             </IconButton>
           </Box>
-          </Toolbar>
+        </Toolbar>
       </AppBar>
       {renderMobileMenu}
       {renderMenu}

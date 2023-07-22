@@ -3,9 +3,17 @@ import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 import { productos } from "./datos/Mercaderia.jsx";
 import Grid from "@mui/material/Grid";
-import PrimarySearchAppBar from "./NavBar";
 
-function Grids() {
+function Grids(props) {
+  const { searchTerm } = props;
+  const filteredResults = searchTerm
+    ? productos.filter(
+        (producto) =>
+          producto.nombre &&
+          producto.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : productos;
+
   const history = useHistory();
   const [productosEnCarrito, setProductosEnCarrito] = React.useState([]);
 
@@ -44,11 +52,10 @@ function Grids() {
   };
 
   return (
-    
     <div>
       <h2 className="tituloProductos">Productos</h2>
       <Grid container spacing={2}>
-        {productos.map((producto) => (
+        {filteredResults.map((producto) => (
           <Grid key={producto.id.toString()} item xs={6} md={4}>
             <div className="container">
               <h4 className="pNombre">{producto.nombre}</h4>
@@ -70,4 +77,3 @@ function Grids() {
 }
 
 export default Grids;
-
