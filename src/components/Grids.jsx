@@ -15,18 +15,14 @@ function Grids(props) {
     : productos;
 
   const history = useHistory();
-  const [productosEnCarrito, setProductosEnCarrito] = React.useState([]);
+  const [carrito, setCarrito] = React.useState(() => JSON.parse(localStorage.getItem("carrito")) || []);
 
   const agregarAlCarrito = (producto) => {
-    let nuevosProductosEnCarrito = [...productosEnCarrito];
-
-    let productoAgregado = nuevosProductosEnCarrito.find(
-      (elem) => elem.id === producto.id
-    );
+    const productoAgregado = carrito.find((item) => item.id === producto.id);
 
     if (productoAgregado === undefined) {
-      nuevosProductosEnCarrito.push(producto);
-      setProductosEnCarrito(nuevosProductosEnCarrito);
+      const nuevosProductosEnCarrito = [...carrito, producto];
+      setCarrito(nuevosProductosEnCarrito);
       localStorage.setItem("carrito", JSON.stringify(nuevosProductosEnCarrito));
 
       Swal.fire({
@@ -47,6 +43,10 @@ function Grids(props) {
   };
 
   const handleAgregarAlCarrito = (producto) => {
+    if (!carrito) {
+      // Si carrito es undefined, inicializamos como un array vacío
+      setCarrito([]);
+    }
     agregarAlCarrito(producto);
     history.push("/carrito");
   };

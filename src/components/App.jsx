@@ -7,24 +7,20 @@ import Grids from "./Grids";
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
   return (
     <Router>
       <div>
         <PrimarySearchAppBar
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
-          handleSearch={handleSearch}
         />
         <Switch>
-          <Route exact path="/carro" component={Carro} />
-          <Route
-            path="/"
-            component={() => <Grids searchTerm={searchTerm} />}
-          />
+          <Route path="/carro" component={Carro} />
+          <Route exact path="/">
+            {window.location.pathname !== "/carro" && (
+              <Grids searchTerm={searchTerm} />
+            )}
+          </Route>
         </Switch>
       </div>
     </Router>

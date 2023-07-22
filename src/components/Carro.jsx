@@ -1,12 +1,9 @@
-
-import React from "react";
-import CarritoProduct from "./CarritoProduct";
+import Carrito from "./CarritoProduct";
 
 function Carro() {
   return (
     <div>
-      {/* Solo se muestra CarritoProduct */}
-      <CarritoProduct />
+      <Carrito />
     </div>
   );
 }

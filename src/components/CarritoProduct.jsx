@@ -1,7 +1,7 @@
 import React from "react";
 import { productos } from "./datos/Mercaderia";
 import Grid from "@mui/material/Grid";
-function Carrito() {
+function Carro() {
   let productosEnCarrito;
   if (localStorage.getItem("carrito")) {
     //cuando ya existe algo en el storage con la clave carrito
@@ -30,4 +30,4 @@ function Carrito() {
   );
 }
 
-export default Carrito;
+export default Carro;
