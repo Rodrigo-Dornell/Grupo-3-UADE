@@ -7,12 +7,18 @@ import Grids from "./Grids";
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
 
+  // Manejar el evento onChange del campo de búsqueda
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   return (
     <Router>
       <div>
         <PrimarySearchAppBar
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
+          handleSearch={handleSearch}
         />
         <Switch>
           <Route path="/carro" component={Carro} />
