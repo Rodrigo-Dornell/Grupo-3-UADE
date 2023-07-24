@@ -11,7 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import AccountCircle from "@mui/icons-material/AccountCircle";
+import HomeIcon from "@mui/icons-material/Home";
 import Brightness6Icon from "@mui/icons-material/Brightness6";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import MoreIcon from "@mui/icons-material/MoreVert";
@@ -132,9 +132,7 @@ export default function PrimarySearchAppBar({
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <Link to="/">
-        <MenuItem onClick={handleMenuClose}>Home</MenuItem>
-      </Link>
+      <MenuItem onClick={handleMenuClose}>Proveedores</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
@@ -189,44 +187,40 @@ export default function PrimarySearchAppBar({
       <AppBar position="static">
         <Toolbar sx={{ justifyContent: "center" }}>
           <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-            onClick={handleProfileMenuOpen}
-          >
-            <MenuIcon />
-          </IconButton>
-          <IconButton
-            size="large"
+            size="small"
             aria-label="account of current user"
             aria-controls="primary-search-account-menu"
             aria-haspopup="true"
             color="inherit"
           >
-            <AccountCircle />
+            <Link to="/">
+              <HomeIcon sx={{ fontSize: 25 }} />
+            </Link>
           </IconButton>
-
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            SNEAKERS
-          </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="buscar.."
-              inputProps={{ "aria-label": "search" }}
-              value={searchTerm || ""}
-              onChange={handleSearch}
-            />
-          </Search>
+          <Box sx={{ marginLeft: "35px" }}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ display: { xs: "none", sm: "block" } }}
+            >
+              SNEAKERS
+            </Typography>
+          </Box>
+          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="buscar.."
+                inputProps={{ "aria-label": "search" }}
+                value={searchTerm || ""}
+                onChange={handleSearch}
+              />
+            </Search>
+          </Box>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
@@ -258,8 +252,9 @@ export default function PrimarySearchAppBar({
               aria-controls={menuId}
               aria-haspopup="true"
               color="inherit"
+              onClick={handleProfileMenuOpen}
             >
-              <AccountCircle />
+              <MenuIcon />
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>

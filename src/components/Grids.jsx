@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { productos } from "./datos/Mercaderia.jsx";
 import Grid from "@mui/material/Grid";
@@ -14,7 +14,7 @@ function Grids(props) {
       )
     : productos;
 
-  const history = useHistory();
+  const Navigate = useNavigate();
   const [carrito, setCarrito] = React.useState(() => JSON.parse(localStorage.getItem("carrito")) || []);
 
   const agregarAlCarrito = (producto) => {
@@ -44,16 +44,15 @@ function Grids(props) {
 
   const handleAgregarAlCarrito = (producto) => {
     if (!carrito) {
-      // Si carrito es undefined, inicializamos como un array vacío
       setCarrito([]);
     }
     agregarAlCarrito(producto);
-    history.push("/carrito");
+    Navigate("/carrito");
   };
 
   return (
     <div>
-      <h2 className="tituloProductos">Productos</h2>
+      <h1 className="titulos">Productos</h1>
       <Grid container spacing={2}>
         {filteredResults.map((producto) => (
           <Grid key={producto.id.toString()} item xs={6} md={4}>
