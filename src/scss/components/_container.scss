@@ -29,12 +29,12 @@
   .pDescripcion {
     margin: 10px;
   }
-  .boton {
+  .botones {
     background-color: variables.$verde;
     border-radius: 20px;
     padding: 7px 5px 7px 5px;
   }
-  .boton:hover {
+  .botones:hover {
     transform: scale(0.9);
     background-color: variables.$verdeOscuro;
     cursor: pointer;

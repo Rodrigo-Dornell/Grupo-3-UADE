@@ -62,7 +62,7 @@ function Grids(props) {
               <p className="pPrecio">Precio: {producto.precio}</p>
               <p className="pDescripcion">{producto.descripcion}</p>
               <button
-                className="boton"
+                className="botones"
                 onClick={() => handleAgregarAlCarrito(producto)}
               >
                 Agregar al carrito

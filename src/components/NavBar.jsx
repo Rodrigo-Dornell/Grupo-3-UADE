@@ -16,7 +16,7 @@ import Brightness6Icon from "@mui/icons-material/Brightness6";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import "../scss/Index.scss";
-import Carro from "./Carro";
+import Carro from "./Carrito";
 import { Link } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
@@ -91,28 +91,28 @@ export default function PrimarySearchAppBar({
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event) => {
+  const ProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMobileMenuClose = () => {
+  const MobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
 
-  const handleMenuClose = () => {
+  const MenuClose = () => {
     setAnchorEl(null);
-    handleMobileMenuClose();
+    MobileMenuClose();
   };
 
-  const handleMobileMenuOpen = (event) => {
+  const MobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const handleDarkModeToggle = () => {
+  const DarkModeToggle = () => {
     setDarkMode(!darkMode);
   };
 
-  const handleAddToCartClick = () => {
+  const AddToCartClick = () => {
     setIsCartVisibleMobile(!isCartVisibleMobile);
   };
   const menuId = "primary-search-account-menu";
@@ -130,10 +130,14 @@ export default function PrimarySearchAppBar({
         horizontal: "right",
       }}
       open={isMenuOpen}
-      onClose={handleMenuClose}
+      onClose={MenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Proveedores</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <Link to="/Proveedor">
+      <MenuItem onClick={MenuClose}>Proveedores</MenuItem>
+      </Link>
+      <Link to="/Clientes">
+      <MenuItem onClick={MenuClose}>Clientes</MenuItem>
+      </Link>
     </Menu>
   );
 
@@ -152,14 +156,14 @@ export default function PrimarySearchAppBar({
         horizontal: "right",
       }}
       open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
+      onClose={MobileMenuClose}
     >
       <MenuItem>
         <IconButton
           size="large"
           aria-label="darkMode"
           color="inherit"
-          onClick={handleDarkModeToggle}
+          onClick={DarkModeToggle}
         >
           <Badge badgeContent={0} color="error">
             <Brightness6Icon />
@@ -171,7 +175,7 @@ export default function PrimarySearchAppBar({
             size="large"
             aria-label="show 17 new notifications"
             color="inherit"
-            onClick={handleAddToCartClick}
+            onClick={AddToCartClick}
           >
             <Badge badgeContent={0} color="error">
               <AddShoppingCartIcon />
@@ -227,7 +231,7 @@ export default function PrimarySearchAppBar({
               size="large"
               aria-label="darkMode"
               color="inherit"
-              onClick={handleDarkModeToggle}
+              onClick={DarkModeToggle}
             >
               <Badge badgeContent={0} color="error">
                 <Brightness6Icon />
@@ -238,7 +242,7 @@ export default function PrimarySearchAppBar({
                 size="large"
                 aria-label="show 17 new notifications"
                 color="inherit"
-                onClick={handleAddToCartClick}
+                onClick={AddToCartClick}
               >
                 <Badge badgeContent={0} color="error">
                   <AddShoppingCartIcon />
@@ -252,7 +256,7 @@ export default function PrimarySearchAppBar({
               aria-controls={menuId}
               aria-haspopup="true"
               color="inherit"
-              onClick={handleProfileMenuOpen}
+              onClick={ProfileMenuOpen}
             >
               <MenuIcon />
             </IconButton>
@@ -263,7 +267,7 @@ export default function PrimarySearchAppBar({
               aria-label="show more"
               aria-controls={mobileMenuId}
               aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
+              onClick={MobileMenuOpen}
               color="inherit"
             >
               <MoreIcon />

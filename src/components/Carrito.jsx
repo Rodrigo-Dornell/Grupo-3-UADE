@@ -1,6 +1,6 @@
 import React from "react";
-import { productos } from "./datos/Mercaderia";
 import Grid from "@mui/material/Grid";
+
 function Carro() {
   let productosEnCarrito;
   if (localStorage.getItem("carrito")) {
@@ -16,7 +16,7 @@ function Carro() {
     <div>
       <h2 className="titulos">Productos en el Carrito</h2>
       <Grid container spacing={2}>
-        {productosEnCarrito.map((producto) => ( // Utiliza productosEnCarrito para mapear los productos en el carrito
+        {productosEnCarrito.map((producto) => (
           <Grid key={producto.id.toString()} item xs={6} md={4}>
             <div className="container">
               <h4 className="pNombre">{producto.nombre}</h4>
