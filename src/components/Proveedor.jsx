@@ -1,4 +1,4 @@
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid, GridToolbarContainer } from "@mui/x-data-grid";
 import { useState, useCallback } from "react";
 import { proveedores } from "./datos/Proveedores";
 import ProveedorForm from "./agregarProv";
@@ -16,23 +16,31 @@ const columns = [
     ),
   },
 ];
-
+const CustomToolbar = () => {
+  return <GridToolbarContainer></GridToolbarContainer>;
+};
 export default function Proveedor() {
   const [data, setData] = useState(proveedores);
 
-  const Eliminar = useCallback((proveedor) => {
-    const nuevosProveedores = data.filter((p) => p.id !== proveedor.id);
-    setData(nuevosProveedores);
-    localStorage.setItem("proveedores", JSON.stringify(nuevosProveedores));
-  }, [data]);
+  const Eliminar = useCallback(
+    (proveedor) => {
+      const nuevosProveedores = data.filter((p) => p.id !== proveedor.id);
+      setData(nuevosProveedores);
+      localStorage.setItem("proveedores", JSON.stringify(nuevosProveedores));
+    },
+    [data]
+  );
 
-  const Agregar = useCallback((nuevoProveedor) => {
-    setData((prevData) => [...prevData, nuevoProveedor]);
-    localStorage.setItem(
-      "proveedores",
-      JSON.stringify([...data, nuevoProveedor])
-    );
-  }, [data]);
+  const Agregar = useCallback(
+    (nuevoProveedor) => {
+      setData((prevData) => [...prevData, nuevoProveedor]);
+      localStorage.setItem(
+        "proveedores",
+        JSON.stringify([...data, nuevoProveedor])
+      );
+    },
+    [data]
+  );
 
   const EditCommit = useCallback(
     (params) => {
@@ -67,12 +75,10 @@ export default function Proveedor() {
               : column
           )}
           components={{
-            Toolbar: () => (
-              <div>
-                <GridToolbar />
-                <ProveedorForm onAgregar={Agregar} data={data} setData={setData} />
-              </div>
-            ),
+            Toolbar: () => <div>
+                <CustomToolbar/>
+                <ProveedorForm data={data} onAgregar={Agregar} />
+                </div>,
           }}
           EditCommit={EditCommit}
           pageSizeOptions={[5, 10, 50, 100]}
