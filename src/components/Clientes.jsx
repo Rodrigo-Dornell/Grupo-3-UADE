@@ -77,7 +77,6 @@ export default function Clientes() {
           components={{
             Toolbar: () => <div>
                 <CustomToolbar/>
-                <ClienteForm data={data} onAgregar={Agregar} />
                 </div>,
           }}
           EditCommit={EditCommit}
@@ -85,6 +84,7 @@ export default function Clientes() {
           checkboxSelection
         />
       </div>
+      <ClienteForm data={data} onAgregar={Agregar} />
     </div>
   );
 }

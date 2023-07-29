@@ -2,7 +2,6 @@ import { DataGrid, GridToolbarContainer } from "@mui/x-data-grid";
 import { useState, useCallback } from "react";
 import { proveedores } from "./datos/Proveedores";
 import ProveedorForm from "./agregarProv";
-
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
   { field: "nombre", headerName: "Nombre", width: 130, editable: true },
