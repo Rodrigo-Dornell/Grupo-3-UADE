@@ -1,5 +1,5 @@
 export const clientes = [
-{ id: 1, nombre: "Juan Pérez", cuit: "20345678901" },
+{ id: 1, nombre: "Ángel Ledesma", cuit: "7564756785" },
 { id: 2, nombre: "María Gómez", cuit: "27456321098" },
 { id: 3, nombre: "Pedro Rodríguez", cuit: "30567890123" },
 { id: 4, nombre: "Ana López", cuit: "24678901234" },

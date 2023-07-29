@@ -1,0 +1,24 @@
+@use "../abstracts/variables";
+.NombreA {
+  margin-left: 10px;
+  font-size: 20px;
+}
+.CuitA {
+  font-size: 20px;
+}
+.BotonA {
+  background-color: variables.$rojo;
+  color: white;
+  padding: 6px;
+  border-radius: 30px;
+}
+.BotonA:hover {
+  transform: scale(0.9);
+  background-color: variables.$verdeOscuro;
+  cursor: pointer;
+}
+.input {
+    padding: 4px;
+    margin: 20px;
+    border-radius: 5px;
+}

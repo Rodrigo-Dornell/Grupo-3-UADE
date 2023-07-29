@@ -2,6 +2,7 @@ import { DataGrid, GridToolbarContainer } from "@mui/x-data-grid";
 import { useState, useCallback } from "react";
 import { proveedores } from "./datos/Proveedores";
 import ProveedorForm from "./agregarProv";
+
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
   { field: "nombre", headerName: "Nombre", width: 130, editable: true },
@@ -16,9 +17,11 @@ const columns = [
     ),
   },
 ];
+
 const CustomToolbar = () => {
   return <GridToolbarContainer></GridToolbarContainer>;
 };
+
 export default function Proveedor() {
   const [data, setData] = useState(proveedores);
 
@@ -75,16 +78,14 @@ export default function Proveedor() {
               : column
           )}
           components={{
-            Toolbar: () => <div>
-                <CustomToolbar/>
-                <ProveedorForm data={data} onAgregar={Agregar} />
-                </div>,
+            Toolbar: () => <CustomToolbar />,
           }}
           EditCommit={EditCommit}
           pageSizeOptions={[5, 10, 50, 100]}
           checkboxSelection
         />
       </div>
+      <ProveedorForm data={data} onAgregar={Agregar} />
     </div>
   );
 }
