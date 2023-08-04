@@ -170,7 +170,7 @@ export default function PrimarySearchAppBar({
           </Badge>
         </IconButton>
 
-        <Link to="/carro">
+        <Link to="/carrito">
           <IconButton
             size="large"
             aria-label="show 17 new notifications"
@@ -237,7 +237,7 @@ export default function PrimarySearchAppBar({
                 <Brightness6Icon />
               </Badge>
             </IconButton>
-            <Link to="/carro">
+            <Link to="/carrito">
               <IconButton
                 size="large"
                 aria-label="show 17 new notifications"
@@ -277,7 +277,6 @@ export default function PrimarySearchAppBar({
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-      {isCartVisibleMobile && <Carro />}
     </Box>
   );
 }
