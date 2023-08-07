@@ -14,7 +14,6 @@ function Grids(props) {
       )
     : productos;
 
-  const Navigate = useNavigate();
   const [carrito, setCarrito] = React.useState(() => JSON.parse(localStorage.getItem("carrito")) || []);
 
   const agregarAlCarrito = (producto) => {
@@ -47,9 +46,9 @@ function Grids(props) {
       setCarrito([]);
     }
     agregarAlCarrito(producto);
-    Navigate("/carrito");
+    
   };
-
+  
   return (
     <div>
       <h1 className="titulos">Productos</h1>
