@@ -6,6 +6,7 @@ import Grids from "./Grids";
 import Proveedor from "./Proveedor";
 import Clientes from "./Clientes";
 import { proveedores } from "./datos/Proveedores";
+import Reportes from './Reportes'
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -29,6 +30,7 @@ function App() {
             element={<Proveedor proveedores={proveedores} />}
           />
           <Route path="/Clientes" element={<Clientes />} />
+          <Route path="/Reportes" element={<Reportes />} />
           <Route path="/" element={<Grids searchTerm={searchTerm} />} />
         </Routes>
       </div>

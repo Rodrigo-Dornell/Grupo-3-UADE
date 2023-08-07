@@ -138,6 +138,9 @@ export default function PrimarySearchAppBar({
       <Link to="/Clientes">
       <MenuItem onClick={MenuClose}>Clientes</MenuItem>
       </Link>
+      <Link to="/Reportes">
+      <MenuItem onClick={MenuClose}>Reportes</MenuItem>
+      </Link>
     </Menu>
   );
 
