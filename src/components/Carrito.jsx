@@ -1,30 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 
 function Carro() {
-  let productosEnCarrito;
-  if (localStorage.getItem("carrito")) {
-    productosEnCarrito = JSON.parse(localStorage.getItem("carrito"));
-  } else {
-    productosEnCarrito = [];
-    localStorage.setItem("carrito", JSON.stringify(productosEnCarrito));
-  }
+  const [productosEnCarrito, setProductosEnCarrito] = useState([]);
+
+  useEffect(() => {
+    if (localStorage.getItem("carrito")) {
+      setProductosEnCarrito(JSON.parse(localStorage.getItem("carrito")));
+    } else {
+      localStorage.setItem("carrito", JSON.stringify([]));
+      setProductosEnCarrito([]);
+    }
+  }, []);
 
   const EliminarFun = (productoId) => {
-    // Encontrar el índice del producto con el mismo id en el arreglo productosEnCarrito
-    const productoIndex = productosEnCarrito.findIndex(producto => producto.id === productoId);
-    
+    const productoIndex = productosEnCarrito.findIndex(
+      (producto) => producto.id === productoId
+    );
+
     if (productoIndex !== -1) {
-      // Eliminar el producto del arreglo productosEnCarrito utilizando splice
-      productosEnCarrito.splice(productoIndex, 1);
-      
-      // Actualizar el storage con el nuevo arreglo de productosEnCarrito
+      if (productosEnCarrito[productoIndex].quantity > 1) {
+        productosEnCarrito[productoIndex].quantity -= 1;
+      } else {
+        productosEnCarrito.splice(productoIndex, 1);
+      }
+
+      // Actualizar el estado con el nuevo arreglo de productos
+      setProductosEnCarrito([...productosEnCarrito]);
+
+      // Actualizar el carrito en el localStorage
       localStorage.setItem("carrito", JSON.stringify(productosEnCarrito));
-      
-      // Forzar una actualización del componente para que refleje los cambios
-      window.location.reload();
     }
   };
+
+
+
 
   return (
     <div>
@@ -35,14 +45,18 @@ function Carro() {
             <div className="container">
               <h4 className="pNombre">{producto.nombre}</h4>
               <img src={producto.imagen} alt={producto.nombre} />
-              <p className="pPrecio">Precio: {producto.precio}</p>
+              <p className="pPrecio">
+                Precio: ${producto.precio * producto.quantity}
+              </p>
             </div>
             <button onClick={() => EliminarFun(producto.id)}> Eliminar </button>
           </Grid>
         ))}
       </Grid>
+      
     </div>
   );
 }
 
 export default Carro;
+

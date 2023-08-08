@@ -14,7 +14,9 @@ function Grids(props) {
       )
     : productos;
 
-  const [carrito, setCarrito] = React.useState(() => JSON.parse(localStorage.getItem("carrito")) || []);
+  const [carrito, setCarrito] = React.useState(
+    () => JSON.parse(localStorage.getItem("carrito")) || []
+  );
 
   const agregarAlCarrito = (producto) => {
     const productoAgregado = carrito.find((item) => item.id === producto.id);
@@ -31,6 +33,12 @@ function Grids(props) {
         confirmButtonText: "Aceptar",
       });
     } else {
+      const updatedCarrito = carrito.map((item) =>
+        item.id === producto.id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+      setCarrito(updatedCarrito);
+      localStorage.setItem("carrito", JSON.stringify(updatedCarrito));
+
       Swal.fire({
         title: "El producto ya existe en el carrito",
         text: `El producto ${producto.nombre} ya se encuentra en el carrito.`,
@@ -46,9 +54,8 @@ function Grids(props) {
       setCarrito([]);
     }
     agregarAlCarrito(producto);
-    
   };
-  
+
   return (
     <div>
       <h1 className="titulos">Productos</h1>
@@ -58,7 +65,10 @@ function Grids(props) {
             <div className="container">
               <h4 className="pNombre">{producto.nombre}</h4>
               <img src={producto.imagen} alt={producto.nombre} />
-              <p className="pPrecio">Precio: {producto.precio}</p>
+
+              <p className="pPrecio">
+                Precio: ${producto.precio * producto.quantity}
+              </p>
               <p className="pDescripcion">{producto.descripcion}</p>
               <button
                 className="botones"
