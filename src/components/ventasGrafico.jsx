@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -22,23 +22,33 @@ ChartJS.register(
 );
 
 export function Ventas({ productosEnCarrito }) {
-  const productoCantidades = {
+  const [productoCantidades, setProductoCantidades] = useState({
     Adidas: 0,
     Nike: 0,
     Puma: 0,
-  };
+  });
 
-  for (let i = 0; i < productosEnCarrito.length; i++) {
-    const nombreProducto = productosEnCarrito[i].nombre;
+  useEffect(() => {
+    const newCantidades = {
+      Adidas: 0,
+      Nike: 0,
+      Puma: 0,
+    };
 
-    if (nombreProducto.includes("Adidas")) {
-      productoCantidades.Adidas += 1;
-    } else if (nombreProducto.includes("Nike")) {
-      productoCantidades.Nike += 1;
-    } else if (nombreProducto.includes("Puma")) {
-      productoCantidades.Puma += 1;
+    for (let i = 0; i < productosEnCarrito.length; i++) {
+      const nombreProducto = productosEnCarrito[i].nombre;
+
+      if (nombreProducto.includes("Adidas")) {
+        newCantidades.Adidas += productosEnCarrito[i].quantity;
+      } else if (nombreProducto.includes("Nike")) {
+        newCantidades.Nike += productosEnCarrito[i].quantity;
+      } else if (nombreProducto.includes("Puma")) {
+        newCantidades.Puma += productosEnCarrito[i].quantity;
+      }
     }
-  }
+
+    setProductoCantidades(newCantidades);
+  }, [productosEnCarrito]);
 
   const marcas = ["Adidas", "Nike", "Puma"];
   const carritoData = [

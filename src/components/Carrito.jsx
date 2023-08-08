@@ -33,8 +33,22 @@ function Carro() {
     }
   };
 
+  function prod() {
+    let productosEnCarrito = JSON.parse(localStorage.getItem("carrito"));
+    let arrayProd = productosEnCarrito.map((x) => x.id);
+    return arrayProd;
+  }
 
+  let nTotal = 0;
+  for (let i = 0; i < prod().length; i++) {
+    const productoIndex = productosEnCarrito.findIndex(
+      (producto) => producto.id === prod()[i]
+    );
 
+    if (productoIndex !== -1) {
+      nTotal += productosEnCarrito[productoIndex].precio * productosEnCarrito[productoIndex].quantity;
+    }
+  }
 
   return (
     <div>
@@ -53,10 +67,11 @@ function Carro() {
           </Grid>
         ))}
       </Grid>
-      
+      <p>Total: $ {nTotal}</p>
     </div>
   );
 }
 
 export default Carro;
+
 
