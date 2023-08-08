@@ -20,9 +20,6 @@ function Carro() {
       
       // Actualizar el storage con el nuevo arreglo de productosEnCarrito
       localStorage.setItem("carrito", JSON.stringify(productosEnCarrito));
-      
-      // Forzar una actualización del componente para que refleje los cambios
-      window.location.reload();
     }
   };
 
