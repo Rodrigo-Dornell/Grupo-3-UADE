@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Ventas } from "./ventasGrafico";
 import { Compras } from "./comprasProveedores";
 import Proveedor from "./Proveedor"; 
