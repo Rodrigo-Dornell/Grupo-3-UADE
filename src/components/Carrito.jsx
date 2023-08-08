@@ -25,10 +25,8 @@ function Carro() {
         productosEnCarrito.splice(productoIndex, 1);
       }
 
-      // Actualizar el estado con el nuevo arreglo de productos
       setProductosEnCarrito([...productosEnCarrito]);
 
-      // Actualizar el carrito en el localStorage
       localStorage.setItem("carrito", JSON.stringify(productosEnCarrito));
     }
   };
@@ -63,11 +61,11 @@ function Carro() {
                 Precio: ${producto.precio * producto.quantity}
               </p>
             </div>
-            <button onClick={() => EliminarFun(producto.id)}> Eliminar </button>
+            <button onClick={() => EliminarFun(producto.id)} className="bEliminar"> Eliminar </button>
           </Grid>
         ))}
       </Grid>
-      <p>Total: $ {nTotal}</p>
+      <h2 className="tP">Total: ${nTotal}</h2>
     </div>
   );
 }

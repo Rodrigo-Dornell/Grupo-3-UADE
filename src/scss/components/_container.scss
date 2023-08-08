@@ -43,3 +43,20 @@
 .titulos {
   text-align: center;
 }
+.bEliminar{
+  background-color: variables.$rojo;
+  color: white;
+  border-radius: 20px;
+  padding: 7px 5px 7px 5px;
+  margin-top: 10px;
+}
+.bEliminar:hover{
+  background-color: variables.$rojoOscuro;
+}
+.tP{
+  background-color: variables.$blueNav;
+  border-radius: 15px;
+  margin-top: 10px;
+  padding: 5px;
+  text-align: center;
+}

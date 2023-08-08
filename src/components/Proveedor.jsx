@@ -21,7 +21,7 @@ const CustomToolbar = () => {
   return <GridToolbarContainer></GridToolbarContainer>;
 };
 
-export default function Proveedor() {
+export default function Proveedor({ proveedoresData }) {
   const [data, setData] = useState(proveedores);
 
   const Eliminar = useCallback(
@@ -46,7 +46,7 @@ export default function Proveedor() {
     },
     [data]
   );
-  
+  //console.log(localStorage.getItem("proveedores"))
 
   const EditCommit = useCallback(
     (params) => {
