@@ -1,5 +1,5 @@
 import { DataGrid, GridToolbarContainer } from "@mui/x-data-grid";
-import { useState, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { proveedores } from "./datos/Proveedores";
 import ProveedorForm from "./agregar/agregarProv";
 const columns = [
@@ -32,17 +32,21 @@ export default function Proveedor() {
     },
     [data]
   );
-
+  useEffect(() => {
+    const storedData = localStorage.getItem("proveedores");
+    if (storedData) {
+      setData(JSON.parse(storedData));
+    }
+  }, []);
   const Agregar = useCallback(
     (nuevoProveedor) => {
-      setData((prevData) => [...prevData, nuevoProveedor]);
-      localStorage.setItem(
-        "proveedores",
-        JSON.stringify([...data, nuevoProveedor])
-      );
+      const nuevosDatos = [...data, nuevoProveedor];
+      setData(nuevosDatos);
+      localStorage.setItem("proveedores", JSON.stringify(nuevosDatos));
     },
     [data]
   );
+  
 
   const EditCommit = useCallback(
     (params) => {

@@ -1,17 +1,17 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-const ClienteForm = ({ onAgregar, data, setData }) => {
+const ClienteForm = ({ onAgregar }) => {
   const [nombre, setNombre] = useState("");
   const [cuit, setCuit] = useState("");
 
-  const Submit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!nombre || !cuit) {
       alert("Por favor, completa todos los campos.");
       return;
     }
     const nuevoCliente = {
-      id: data.length + 1, 
+      id: Math.max(...data.map((cliente) => cliente.id), 0) + 1,
       nombre: nombre,
       cuit: cuit,
     };
@@ -23,7 +23,7 @@ const ClienteForm = ({ onAgregar, data, setData }) => {
   };
 
   return (
-    <form onSubmit={Submit}>
+    <form onSubmit={handleSubmit}>
       <div>
         <label>Nombre:</label>
         <input

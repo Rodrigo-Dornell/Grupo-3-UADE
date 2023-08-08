@@ -1,7 +1,7 @@
+import React, { useState, useEffect, useCallback } from "react";
 import { DataGrid, GridToolbarContainer } from "@mui/x-data-grid";
-import { useState, useCallback } from "react";
-import { clientes } from "./datos/Cliente";
 import ClienteForm from "./agregar/agregarProv";
+
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
   { field: "nombre", headerName: "Nombre", width: 130, editable: true },
@@ -16,16 +16,25 @@ const columns = [
     ),
   },
 ];
+
 const CustomToolbar = () => {
   return <GridToolbarContainer></GridToolbarContainer>;
 };
+
 export default function Clientes() {
-  const [data, setData] = useState(clientes);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const storedClientes = localStorage.getItem("clientes");
+    if (storedClientes) {
+      setData(JSON.parse(storedClientes));
+    }
+  }, []);
 
   const Eliminar = useCallback(
     (cliente) => {
-      const nuevosClientes = data.filter((p) => p.id !== clientes.id);
-      setData(nuevosCliente);
+      const nuevosClientes = data.filter((p) => p.id !== cliente.id);
+      setData(nuevosClientes);
       localStorage.setItem("clientes", JSON.stringify(nuevosClientes));
     },
     [data]
@@ -33,11 +42,9 @@ export default function Clientes() {
 
   const Agregar = useCallback(
     (nuevoCliente) => {
-      setData((prevData) => [...prevData, nuevoCliente]);
-      localStorage.setItem(
-        "Clientes",
-        JSON.stringify([...data, nuevoCliente])
-      );
+      const nuevosClientes = [...data, nuevoCliente];
+      setData(nuevosClientes);
+      localStorage.setItem("clientes", JSON.stringify(nuevosClientes));
     },
     [data]
   );
@@ -52,7 +59,7 @@ export default function Clientes() {
       });
 
       setData(editedRows);
-      localStorage.setItem("Clientes", JSON.stringify(editedRows));
+      localStorage.setItem("clientes", JSON.stringify(editedRows));
     },
     [data]
   );
@@ -75,16 +82,14 @@ export default function Clientes() {
               : column
           )}
           components={{
-            Toolbar: () => <div>
-                <CustomToolbar/>
-                </div>,
+            Toolbar: () => <CustomToolbar />,
           }}
           EditCommit={EditCommit}
           pageSizeOptions={[5, 10, 50, 100]}
           checkboxSelection
         />
       </div>
-      <ClienteForm data={data} onAgregar={Agregar} />
+      <ClienteForm onAgregar={Agregar} data={data} />
     </div>
   );
 }
