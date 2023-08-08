@@ -57,6 +57,7 @@ function Carro() {
             <div className="container">
               <h4 className="pNombre">{producto.nombre}</h4>
               <img src={producto.imagen} alt={producto.nombre} />
+              <h4 className="pQ">{producto.quantity}</h4>
               <p className="pPrecio">
                 Precio: ${producto.precio * producto.quantity}
               </p>
